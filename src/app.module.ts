@@ -19,8 +19,21 @@ import { AppController } from './app.controller';
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       typePaths: ['./**/*.graphql'],
-      context: ({ req }) => ({ req }),
+      introspection: true,
       playground: true,
+      installSubscriptionHandlers: true,
+      context: async ({ req, connection }) => {
+        if (connection) {
+          // subscriptions
+          return {
+            req: {
+              headers: { authorization: connection.context.Authorization },
+            },
+          };
+        }
+        // queries and mutations
+        return { req };
+      },
     }),
     UserModule,
     AuthModule,
