@@ -19,6 +19,7 @@ import { AttachmentModule } from './attachment/attachment.module';
       autoSchemaFile: 'schema.gql',
       typePaths: ['./**/*.graphql'],
       context: ({ req }) => ({ req }),
+      playground: true,
     }),
     UserModule,
     AuthModule,
