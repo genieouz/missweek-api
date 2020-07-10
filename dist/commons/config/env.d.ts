@@ -1,0 +1,1 @@
+export declare const MONGO_HOST: string, MONGO_DB_NAME: string, MONGO_PORT: string, MONGO_URL: string, TWILIO_AUTH_TOKEN: string, TWILIO_ACCOUNT_SID: string, TWILIO_PHONE_NUMBER: string, TOKEN_SECRET: string;
