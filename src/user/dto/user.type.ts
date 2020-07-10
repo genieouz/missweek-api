@@ -24,4 +24,7 @@ export class User {
 
   @Field()
   public birthDate: Date;
+
+  @Field()
+  public instagramUsername: String;
 }

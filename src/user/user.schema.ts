@@ -23,4 +23,7 @@ export const UserSchema = new Schema({
     type: String,
     default: UserRoles.USER,
   },
+  instagramUsername: {
+    type: String,
+  },
 });

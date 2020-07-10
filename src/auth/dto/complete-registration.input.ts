@@ -6,9 +6,12 @@ export class CompleteRegistrationInput {
   @Field()
   public fullName: string;
 
-  @Field({ nullable: true })
+  @Field()
   public birthDate: Date;
 
-  @Field(type => UserGender, { nullable: true })
+  @Field(type => UserGender)
   public gender: UserGender;
+
+  @Field({ nullable: true })
+  public instagramUsername: String;
 }

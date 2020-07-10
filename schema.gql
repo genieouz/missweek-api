@@ -12,8 +12,9 @@ type Attachment {
 
 input CompleteRegistrationInput {
   fullName: String!
-  birthDate: DateTime
-  gender: UserGender
+  birthDate: DateTime!
+  gender: UserGender!
+  instagramUsername: String
 }
 
 """
@@ -60,6 +61,7 @@ type User {
   fullName: String!
   gender: UserGender!
   birthDate: DateTime!
+  instagramUsername: String!
 }
 
 enum UserGender {
