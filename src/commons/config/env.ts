@@ -9,4 +9,6 @@ export const MONGO_HOST = process.env.MONGO_HOST,
          TWILIO_AUTH_TOKEN = process.env.TWILIO_AUTH_TOKEN,
          TWILIO_ACCOUNT_SID = process.env.TWILIO_ACCOUNT_SID,
          TWILIO_PHONE_NUMBER = process.env.TWILIO_PHONE_NUMBER,
-         TOKEN_SECRET = process.env.TOKEN_SECRET;
+         TOKEN_SECRET = process.env.TOKEN_SECRET,
+         PORT = process.env.PORT
+         ;
