@@ -7,6 +7,7 @@ import { UserModule } from '~/user/user.module';
 import { AuthModule } from '~/auth/auth.module';
 import { PostModule } from './post/post.module';
 import { AttachmentModule } from './attachment/attachment.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { AttachmentModule } from './attachment/attachment.module';
     PostModule,
     AttachmentModule,
   ],
+  controllers: [AppController],
   exports: [DatabaseModule]
 })
 export class AppModule {}
