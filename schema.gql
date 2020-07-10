@@ -3,80 +3,17 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-input AccessCodeDto {
-  username: String!
-  password: String!
-  role: AccessCodeRole!
-}
-
-type AccessCodeEntity {
-  _id: ID!
-  organizer: UserEntity!
-  username: String!
-  password: String!
-  role: AccessCodeRole!
-}
-
-enum AccessCodeRole {
-  ADMIN
-  EDITOR
-  PARTICIPANTS_MANAGER
-  OBSERVER
-}
-
-type AccessCodesEntity {
-  recordsLength: Float!
-  totalRecords: Float!
-  offset: Float!
-  limit: Float!
-  pages: Float!
-  currentPage: Float!
-  records: [AccessCodeEntity!]!
-}
-
-"""Arbitrary object"""
-scalar Any
-
-type AttachmentRecord {
+type Attachment {
   id: ID!
+  targetRef: ID!
   sizeB: Int!
   extension: String!
 }
 
-type CategoriesEntity {
-  recordsLength: Float!
-  totalRecords: Float!
-  offset: Float!
-  limit: Float!
-  pages: Float!
-  currentPage: Float!
-  records: [CategoryEntity!]!
-}
-
-type CategoryEntity {
-  _id: ID!
-  name: String!
-  refused: Float!
-  validated: Float!
-  blocked: Float!
-  pending: Float!
-  activated: Float!
-  desactivated: Float!
-  archived: Float!
-  paidEntrance: Float!
-  freeEntrance: Float!
-}
-
-input CategoryInput {
-  name: String!
-}
-
-input ClientFilterInput {
-  offset: Int
-  limit: Int
-  filter: Any
-  search: String
-  orderBy: OrderByInput
+input CompleteRegistrationInput {
+  fullName: String!
+  birthDate: DateTime
+  gender: UserGender
 }
 
 """
@@ -84,259 +21,45 @@ The javascript `Date` as string. Type represents date and time as the ISO Date s
 """
 scalar DateTime
 
-enum EventAccessType {
-  Uniq
-  Free
+type FinalizeRegistration {
+  token: String!
 }
 
-type EventEntity {
-  _id: ID!
-  description: String!
-  address: String!
-  locationAccuracy: String!
-  state: EventState!
-  status: EventStatus!
-  type: EventType!
-  name: String!
-  catchyPhrase: String!
-  createdBy: UserEntity!
-  category: CategoryEntity!
-  startDate: DateTime!
-  endDate: DateTime!
-  expectedNumberOfPersons: Float!
-  accessType: EventAccessType!
-  keepContactWithParticipant: Boolean!
-  paidEntrance: Boolean!
-  priceIncludingCharges: Boolean!
-  categoryCriteria: [String!]!
-  purchasedTicketInvolveFreeTicket: TicketRequirements!
-  tickets: [Ticket!]!
-  reservation: ReservationRequirements!
-  poster: ImageSizes!
-}
-
-type EventsEntity {
-  recordsLength: Float!
-  totalRecords: Float!
-  offset: Float!
-  limit: Float!
-  pages: Float!
-  currentPage: Float!
-  records: [EventEntity!]!
-}
-
-enum EventState {
-  ACTIVATED
-  DESACTIVATED
-  ARCHIVED
-}
-
-enum EventStatus {
-  VALIDATED
-  REFUSED
-  PENDING
-  BLOCKED
-}
-
-enum EventType {
-  Private
-  Public
-}
-
-type ImageSizes {
-  sm: ID
-  md: ID
-  lg: ID
-}
-
-enum InternalRole {
-  STRATEGIC
-  FINANCE
-  MARKETING
-  STANDARD
-}
-
-input LoginDto {
-  email: String!
-  password: String!
+input FinalizeRegistrationInput {
+  validationCode: String!
+  validationToken: String!
 }
 
 type Mutation {
-  changeEventState(state: EventState!, eventId: ID!): EventEntity!
-  changeEventStatus(status: EventStatus!, eventId: ID!): EventEntity!
-  createTicket(ticketDto: TicketDto!, eventId: ID!): EventEntity!
-  removeTicket(ticketId: ID!, eventId: ID!): EventEntity!
-  register(registerInput: RegisterDto!): SessionEntity!
-  createCategory(categoryInput: CategoryInput!): CategoryEntity!
-  createPromotionalCode(promotionalCodeDto: PromotionalCodeDto!): PromotionalCodeEntity!
-  createAccessCode(accessCodeDto: AccessCodeDto!): AccessCodeEntity!
-}
-
-"""OrderBy direction"""
-enum OrderByDirection {
-  Asc
-  Desc
-}
-
-input OrderByInput {
-  property: String!
-  direction: OrderByDirection!
-}
-
-type Paging {
-  recordsLength: Float!
-  totalRecords: Float!
-  offset: Float!
-  limit: Float!
-  pages: Float!
-  currentPage: Float!
-}
-
-input PromotionalCodeDto {
-  eventId: ID!
-  impact: PromotionalCodeImpact!
-  privateName: String!
-  numberOfGeneratedCodes: Float!
-  tickets: [ID!]!
-  reductionEffect: ReductionEffectDto!
-  publicName: String!
-  usableNumberOfTimes: Float!
-  startDate: DateTime!
-  endDate: DateTime!
-}
-
-type PromotionalCodeEntity {
-  _id: String!
-  eventId: ID!
-  event: EventEntity!
-  impact: PromotionalCodeImpact!
-  privateName: String!
-  numberOfGeneratedCodes: Float!
-  tickets: [Ticket!]!
-  reductionEffect: ReductionEffectEntity!
-  publicName: String!
-  usableNumberOfTimes: Float!
-  startDate: DateTime!
-  endDate: DateTime!
-}
-
-enum PromotionalCodeImpact {
-  MASK_TICKETS
-  APPLY_REDUCTION
-}
-
-type PromotionalCodesEntity {
-  recordsLength: Float!
-  totalRecords: Float!
-  offset: Float!
-  limit: Float!
-  pages: Float!
-  currentPage: Float!
-  records: [PromotionalCodeEntity!]!
+  updateProfile(userInput: UserInput!): User!
+  startRegistration(startRegistrationInput: StartRegistrationInput!): StartRegistration!
+  finalizeRegistration(finalizeRegistrationInput: FinalizeRegistrationInput!): FinalizeRegistration!
+  completeRegistration(completeRegistrationInput: CompleteRegistrationInput!): User!
 }
 
 type Query {
-  fetchEvents: EventsEntity!
-  fetchEvent(eventId: ID!): EventEntity!
-  fetchRecentEvents: EventsEntity!
-  fetchCategoryEvents(categoryId: ID!): EventsEntity!
-  fetchCurrentUser: UserEntity!
-  fetchAdmins: UsersEntity!
-  fetchClients: UsersEntity!
-  login(loginInput: LoginDto!): SessionEntity!
-  fetchCategories: CategoriesEntity!
-  fetchPromotionalCodes: PromotionalCodesEntity!
-  fetchAccessCodes: AccessCodesEntity!
+  fetchProfile: User!
+  fetchUsers: [User!]!
 }
 
-input ReductionEffectDto {
-  inPercentage: Boolean!
-  reduction: Float!
+type StartRegistration {
+  validationCode: String!
+  validationToken: String!
 }
 
-type ReductionEffectEntity {
-  inPercentage: Boolean!
-  reduction: Float!
+input StartRegistrationInput {
+  phone: Float!
+  countryCode: Float!
 }
 
-input RegisterDto {
-  phoneNumber: String!
-  lastName: String!
-  firstName: String!
-  password: String!
-  email: String!
-  birthDate: DateTime!
-  gender: String!
-  city: String!
-  district: String!
-}
-
-type ReservationRequirements {
-  allowed: Boolean!
-  payWhenReservation: Boolean!
-  reservationFeeRefundable: Boolean!
-  percentageToPay: Float!
-  limiteDateConfirmation: DateTime!
-}
-
-type SessionEntity {
-  token: String!
-  user: UserEntity!
-}
-
-type Ticket {
+type User {
   _id: ID!
-  name: String!
-  categoryCriteria: String!
-  quantity: Float!
-  price: Float!
-}
-
-input TicketDto {
-  name: String!
-  categoryCriteria: String!
-  quantity: Float!
-  price: Float!
-}
-
-type TicketRequirements {
-  purchasedTicketInvolveFreeTicket: Boolean!
-  purchasedTickets: TicketRequirementsQuantity!
-  offeredTickets: TicketRequirementsQuantity!
-}
-
-type TicketRequirementsQuantity {
-  quantity: Float!
-  categoryCriteria: String!
-}
-
-input UserDto {
-  countryCode: String!
+  phone: Float!
+  countryCode: Float!
   role: UserRoles!
+  fullName: String!
   gender: UserGender!
   birthDate: DateTime!
-  phoneNumber: String!
-  lastName: String!
-  firstName: String!
-  email: String!
-  internalRole: InternalRole!
-}
-
-type UserEntity {
-  _id: ID!
-  countryCode: String
-  role: UserRoles!
-  internalRole: InternalRole
-  gender: UserGender!
-  birthDate: DateTime
-  phoneNumber: String
-  lastName: String!
-  firstName: String!
-  password: String!
-  email: String!
-  avatar: ImageSizes
-  city: String!
-  district: String!
 }
 
 enum UserGender {
@@ -344,18 +67,14 @@ enum UserGender {
   FEMALE
 }
 
+input UserInput {
+  fullName: String
+  gender: UserGender
+  birthDate: DateTime
+}
+
+"""User role"""
 enum UserRoles {
   USER
   ADMIN
-  ORGANIZER
-}
-
-type UsersEntity {
-  recordsLength: Float!
-  totalRecords: Float!
-  offset: Float!
-  limit: Float!
-  pages: Float!
-  currentPage: Float!
-  records: [UserEntity!]!
 }
