@@ -1,0 +1,24 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.16.0
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  SNYK-JS-LODASH-567746:
+    - mongoose-gridfs > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - twilio > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - mongoose-gridfs > @lykmapipo/mongoose-common > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - mongoose-gridfs > @lykmapipo/mongoose-common > @lykmapipo/env > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - mongoose-gridfs > @lykmapipo/mongoose-common > mongoose-valid8 > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - mongoose-gridfs > @lykmapipo/mongoose-common > @lykmapipo/env > @lykmapipo/common > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - mongoose-gridfs > @lykmapipo/mongoose-common > mongoose-valid8 > @lykmapipo/phone > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - mongoose-gridfs > @lykmapipo/mongoose-common > mongoose-valid8 > @lykmapipo/phone > @lykmapipo/env > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
+    - mongoose-gridfs > @lykmapipo/mongoose-common > mongoose-valid8 > @lykmapipo/phone > @lykmapipo/env > @lykmapipo/common > lodash:
+        patched: '2020-07-18T13:06:40.180Z'
