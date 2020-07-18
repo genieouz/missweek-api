@@ -36,11 +36,25 @@ type Mutation {
   startRegistration(startRegistrationInput: StartRegistrationInput!): StartRegistration!
   finalizeRegistration(finalizeRegistrationInput: FinalizeRegistrationInput!): FinalizeRegistration!
   completeRegistration(completeRegistrationInput: CompleteRegistrationInput!): User!
+  likePost(postId: ID!): Float!
+  dislikePost(postId: ID!): Float!
+}
+
+type PostEntity {
+  _id: ID!
+  description: String!
+  attachment: ID!
+  postedBy: User!
+  createdAt: DateTime!
+  numberOfLikes: Float!
+  likes: [User!]!
+  likedByCurrentUser: Boolean!
 }
 
 type Query {
   fetchProfile: User!
   fetchUsers: [User!]!
+  fetchPosts: [PostEntity!]!
 }
 
 type StartRegistration {

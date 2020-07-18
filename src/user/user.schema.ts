@@ -26,4 +26,4 @@ export const UserSchema = new Schema({
   instagramUsername: {
     type: String,
   },
-});
+}, { timestamps: true });
