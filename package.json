@@ -22,7 +22,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@nestjs/common": "^6.0.0",
+    "@nestjs/common": "^8.0.7",
     "@nestjs/core": "^6.0.0",
     "@nestjs/graphql": "^6.5.3",
     "@nestjs/jwt": "^7.0.0",
