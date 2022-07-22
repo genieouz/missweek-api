@@ -2,7 +2,7 @@ import { UserGender } from '~/user/types/user-gender';
 import { UserRoles } from '~/user/types/user.roles';
 import { Schema } from 'mongoose';
 import { userModelName } from '~/user/user.model-name';
-import { attachmentModelName } from 'dist/attachment/attachment.namings';
+import { attachmentModelName } from '~/attachment/attachment.namings';
 
 export const PostSchema = new Schema({
     postedBy: {

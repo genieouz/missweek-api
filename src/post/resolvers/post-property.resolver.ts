@@ -6,7 +6,7 @@ import { PostEntity } from "~/post/dto/post.entity";
 import { User } from "~/user/dto/user.type";
 import { PostService } from "~/post/services/post.service";
 import { IPost } from "../models/interfaces/post.interface";
-import { CurrentUser } from "dist/auth/decorators/current-user.decorator";
+import { CurrentUser } from "~/auth/decorators/current-user.decorator";
 
 @Resolver(of => PostEntity)
 export class PostPropertyResolver {
